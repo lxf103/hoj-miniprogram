@@ -1,0 +1,110 @@
+<view class="container">
+  <view wx:if="{{err}}" class="card"><text class="err-text">{{err}}</text></view>
+
+  <!-- 题头 -->
+  <view class="card" wx:if="{{problem}}">
+    <view class="d-top">
+      <text class="tag diff-l3" wx:if="{{problem.difficulty}}">{{problem.difficulty}}</text>
+      <text class="d-title">{{problem.title}}</text>
+    </view>
+    <view class="meta muted">
+      #{{problem.numericPid || key}}
+      <text> · 时间 {{problem.timeLimit}}</text>
+      <text> · 内存 {{problem.memoryLimit}}</text>
+    </view>
+    <view class="meta muted" wx:if="{{problem.categoryName}}">分类：{{problem.categoryName}}</view>
+    <view class="tags" wx:if="{{problem.tags.length}}">
+      <text class="ktag" wx:for="{{problem.tags}}" wx:key="index">{{item}}</text>
+    </view>
+    <view class="meta muted" wx:if="{{problem.provenance}}">来源：{{problem.provenance}}</view>
+  </view>
+
+  <!-- 题面 -->
+  <view class="card" wx:if="{{problem}}">
+    <view class="sec-title">题目描述</view>
+    <view class="sec-body">{{problem.description || '（无描述）'}}</view>
+
+    <block wx:if="{{problem.input}}">
+      <view class="sec-title">输入格式</view>
+      <view class="sec-body">{{problem.input}}</view>
+    </block>
+    <block wx:if="{{problem.output}}">
+      <view class="sec-title">输出格式</view>
+      <view class="sec-body">{{problem.output}}</view>
+    </block>
+    <block wx:if="{{problem.hint}}">
+      <view class="sec-title">提示</view>
+      <view class="sec-body">{{problem.hint}}</view>
+    </block>
+
+    <block wx:if="{{problem.samples.length}}">
+      <view class="sec-title">样例</view>
+      <view wx:for="{{problem.samples}}" wx:key="index" class="sample-box">
+        <view class="sample-label muted">输入</view>
+        <view class="sample">{{item.input}}</view>
+        <view class="sample-label muted">输出</view>
+        <view class="sample">{{item.output}}</view>
+      </view>
+    </block>
+  </view>
+
+  <!-- 代码区 -->
+  <view class="card">
+    <view class="code-head">
+      <view class="sec-title-inline">你的代码</view>
+      <view class="lang-row" bindtap="chooseLang">
+        <text class="lang">{{curLang || '选择语言'}} ▾</text>
+      </view>
+    </view>
+
+    <textarea class="code" placeholder="在这里写代码" value="{{code}}"
+              bindinput="onCodeInput" auto-height maxlength="-1"
+              adjust-position="{{false}}" show-confirm-bar="{{false}}"></textarea>
+
+    <view class="code-actions">
+      <view class="mini-btn" bindtap="insertTemplate">插入模板</view>
+      <view wx:if="{{bid}}" class="hint">本次提交属于作业 {{bid}}</view>
+    </view>
+
+    <view class="submit-btn {{(submitting || judging) ? 'btn-disabled' : ''}}" bindtap="submit">
+      {{submitting ? '提交中…' : (judging ? '判题中…' : '提交代码')}}
+    </view>
+  </view>
+
+  <!-- 判题结果 -->
+  <view class="card" wx:if="{{result}}">
+    <view class="res-line">
+      <text class="res-text status-{{result.cls}}">{{result.code ? result.code + '　' : ''}}{{result.text}}</text>
+    </view>
+    <view class="muted res-meta" wx:if="{{detail && (detail.time || detail.memory)}}">
+      用时 {{detail.time}} · 内存 {{detail.memory}} · {{detail.language}}
+    </view>
+    <view class="muted res-meta" wx:if="{{detail && detail.inDate}}">{{detail.inDate}}</view>
+
+    <block wx:if="{{cases.length}}">
+      <view class="sec-title">测试点</view>
+      <view class="case-row case-head">
+        <text class="c1">测试点</text><text class="c2">结果</text><text class="c3">时间</text><text class="c4">内存</text>
+      </view>
+      <view class="case-row" wx:for="{{cases}}" wx:key="file">
+        <text class="c1">{{item.file}}</text>
+        <text class="c2">{{item.result}}</text>
+        <text class="c3">{{item.time}}</text>
+        <text class="c4">{{item.memory}}</text>
+      </view>
+    </block>
+
+    <view wx:if="{{detail && detail.id}}" class="mini-btn full"
+          data-id="{{detail.id}}" bindtap="goSubmission">查看完整提交记录 →</view>
+  </view>
+
+  <!-- 本题历史 -->
+  <view class="card" wx:if="{{history.length}}">
+    <view class="sec-title">我的本题提交</view>
+    <view class="h-row" wx:for="{{history}}" wx:key="id"
+          data-id="{{item.id}}" bindtap="goSubmission">
+      <text class="status-{{item.statusCls}} h-status">{{item.statusText}}</text>
+      <text class="muted h-meta">{{item.language}} · {{item.time}} · {{item.inDateText}}</text>
+    </view>
+  </view>
+</view>

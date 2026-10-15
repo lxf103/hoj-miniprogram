@@ -1,0 +1,79 @@
+/* 全局样式：所有页面都能用。品牌蓝对齐 HOJ 电脑端 #2563eb */
+page {
+  background: #f5f6f8;
+  color: #1f2329;
+  font-size: 28rpx;
+  line-height: 1.6;
+}
+
+.container { padding: 24rpx; }
+
+.card {
+  background: #fff;
+  border-radius: 16rpx;
+  padding: 24rpx;
+  margin-bottom: 20rpx;
+  box-shadow: 0 2rpx 8rpx rgba(0, 0, 0, 0.04);
+}
+
+.muted { color: #8a8f99; font-size: 24rpx; }
+.link { color: #2563eb; }
+
+/* 难度标签（对齐 HOJ 的 L1~L5） */
+.tag {
+  display: inline-block;
+  padding: 2rpx 14rpx;
+  border-radius: 8rpx;
+  font-size: 22rpx;
+  white-space: nowrap;
+}
+.diff-l1 { background: #e6f4ea; color: #1a7f37; }
+.diff-l2 { background: #e8f0fe; color: #1a56b8; }
+.diff-l3 { background: #fff4e5; color: #b76e00; }
+.diff-l4 { background: #fde8e8; color: #c0392b; }
+.diff-l5 { background: #f3e8ff; color: #7c3aed; }
+
+/* 知识点小标签 */
+.ktag {
+  display: inline-block;
+  background: #f0f2f5;
+  color: #6b7280;
+  font-size: 22rpx;
+  padding: 2rpx 12rpx;
+  border-radius: 6rpx;
+  margin: 0 10rpx 8rpx 0;
+}
+
+/* 判题状态颜色 */
+.status-ac   { color: #1a7f37; font-weight: bold; }
+.status-wa   { color: #c0392b; font-weight: bold; }
+.status-tle  { color: #b76e00; font-weight: bold; }
+.status-mle  { color: #b76e00; font-weight: bold; }
+.status-re   { color: #c0392b; font-weight: bold; }
+.status-ce   { color: #7c3aed; font-weight: bold; }
+.status-pe   { color: #b76e00; font-weight: bold; }
+.status-ole  { color: #b76e00; font-weight: bold; }
+.status-todo { color: #8a8f99; }
+
+/* 主按钮 */
+.btn-primary {
+  background: #2563eb;
+  color: #fff;
+  border-radius: 12rpx;
+  padding: 16rpx 32rpx;
+  text-align: center;
+  font-size: 28rpx;
+  display: inline-block;
+}
+
+/* 顶部小标题（对齐网页里那行英文小标） */
+.eyebrow { color: #2563eb; font-size: 22rpx; letter-spacing: 2rpx; font-weight: 600; }
+.page-title { font-size: 44rpx; font-weight: 700; margin: 6rpx 0 8rpx; }
+
+/* 调试用：显示接口原始返回，接好后整块删掉 */
+.debug { background: #fffbe6; border: 2rpx dashed #d4b106; }
+.rawtext {
+  display: block; margin-top: 8rpx;
+  font-family: monospace; font-size: 22rpx; color: #333;
+  word-break: break-all; white-space: pre-wrap;
+}

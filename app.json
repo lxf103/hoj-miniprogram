@@ -1,0 +1,39 @@
+{
+  "pages": [
+    "pages/overview/overview",
+    "pages/courses/courses",
+    "pages/problems/problems",
+    "pages/submissions/submissions",
+    "pages/mine/mine",
+    "pages/detail/detail",
+    "pages/course-detail/course-detail",
+    "pages/batch/batch",
+    "pages/category/category",
+    "pages/students/students",
+    "pages/student-progress/student-progress",
+    "pages/submission-detail/submission-detail",
+    "pages/login/login"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#2563eb",
+    "navigationBarTitleText": "HOJ 教学平台",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#f5f6f8"
+  },
+  "tabBar": {
+    "color": "#8a8f99",
+    "selectedColor": "#2563eb",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      { "pagePath": "pages/overview/overview", "text": "总览" },
+      { "pagePath": "pages/courses/courses", "text": "课程" },
+      { "pagePath": "pages/problems/problems", "text": "题库" },
+      { "pagePath": "pages/submissions/submissions", "text": "提交" },
+      { "pagePath": "pages/mine/mine", "text": "我的" }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

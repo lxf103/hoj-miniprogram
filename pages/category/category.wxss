@@ -1,0 +1,27 @@
+.g-title { font-size: 36rpx; font-weight: 700; }
+.g-meta { margin-top: 8rpx; font-size: 24rpx; }
+.g-tags { margin-top: 12rpx; }
+
+.search { margin-bottom: 16rpx; }
+.search-input {
+  background: #fff; border-radius: 12rpx;
+  padding: 16rpx 24rpx; font-size: 28rpx;
+}
+
+.chips { display: flex; flex-wrap: wrap; gap: 14rpx; margin-bottom: 16rpx; }
+.chip {
+  font-size: 24rpx; color: #6b7280; background: #fff;
+  border-radius: 24rpx; padding: 8rpx 26rpx;
+}
+.chip-on { background: #2563eb; color: #fff; }
+
+.list-title { font-size: 24rpx; margin-bottom: 12rpx; }
+
+.p-item { padding: 22rpx 24rpx; }
+.p-top { display: flex; align-items: flex-start; justify-content: space-between; }
+.p-title { flex: 1; font-size: 30rpx; font-weight: 500; }
+.p-diff { flex-shrink: 0; margin-left: 12rpx; }
+.p-foot { margin-top: 8rpx; font-size: 22rpx; }
+
+.err-text { color: #c0392b; }
+.empty { text-align: center; padding: 60rpx 0; color: #8a8f99; }

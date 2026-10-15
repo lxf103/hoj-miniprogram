@@ -1,0 +1,32 @@
+.s-name { font-size: 38rpx; font-weight: 700; }
+.s-sub { margin-top: 8rpx; font-size: 24rpx; }
+
+.score-row { display: flex; align-items: baseline; justify-content: space-between; margin-top: 20rpx; }
+.score-main { display: flex; align-items: baseline; }
+.score-num { font-size: 52rpx; font-weight: 700; color: #2563eb; }
+.score-total { font-size: 24rpx; }
+.score-rate { font-size: 26rpx; color: #1a7f37; font-weight: 600; }
+
+.bar { height: 12rpx; background: #eef0f3; border-radius: 6rpx; margin: 12rpx 0; overflow: hidden; }
+.bar-in { height: 12rpx; background: #2563eb; border-radius: 6rpx; }
+
+.batch { padding: 24rpx; }
+.b-top { display: flex; align-items: baseline; justify-content: space-between; }
+.b-title { font-size: 32rpx; font-weight: 600; flex: 1; }
+.b-score { font-size: 26rpx; color: #2563eb; font-weight: 600; flex-shrink: 0; margin-left: 12rpx; }
+.b-sub { font-size: 22rpx; margin-top: 6rpx; }
+
+.p-row {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 16rpx 0; border-top: 2rpx solid #f0f2f5; margin-top: 8rpx;
+}
+.p-main { flex: 1; min-width: 0; }
+.p-title { font-size: 28rpx; }
+.p-sub { font-size: 22rpx; margin-top: 4rpx; }
+.p-right { text-align: right; flex-shrink: 0; margin-left: 12rpx; }
+.p-status { font-size: 26rpx; }
+.p-score { font-size: 22rpx; margin-top: 2rpx; }
+
+.tip { text-align: center; font-size: 22rpx; margin: 24rpx 0 10rpx; }
+.err-text { color: #c0392b; }
+.empty { text-align: center; padding: 60rpx 0; color: #8a8f99; }

@@ -1,0 +1,63 @@
+<view class="container">
+
+  <view class="card profile">
+    <view class="avatar">{{avatar}}</view>
+    <view class="info">
+      <view class="name">{{name}}</view>
+      <view class="muted acc">{{account || '点击下方登录'}}</view>
+    </view>
+    <view wx:if="{{logged}}" class="role">{{role}}</view>
+    <view wx:else class="btn-login" bindtap="goLogin">登录</view>
+  </view>
+
+  <block wx:if="{{logged}}">
+    <view class="stats">
+      <view class="stat card">
+        <view class="stat-num">{{stats.submissions}}</view>
+        <view class="stat-label muted">提交总数</view>
+      </view>
+      <view class="stat card">
+        <view class="stat-num ok">{{stats.accepted}}</view>
+        <view class="stat-label muted">通过数</view>
+      </view>
+      <view class="stat card">
+        <view class="stat-num">{{stats.courses}}</view>
+        <view class="stat-label muted">课程</view>
+      </view>
+    </view>
+  </block>
+
+  <view class="menu-group">
+    <view class="menu card" bindtap="goCourses">
+      <text>我的课程</text><text class="arrow">›</text>
+    </view>
+    <view class="menu card" bindtap="goSubmissions">
+      <text>我的提交</text><text class="arrow">›</text>
+    </view>
+    <view class="menu card" bindtap="goProblems">
+      <text>题库刷题</text><text class="arrow">›</text>
+    </view>
+  </view>
+
+  <view class="menu-group">
+    <view class="menu card" bindtap="goProblems">
+      <text>题库刷题</text><text class="arrow">›</text>
+    </view>
+    <view class="menu card" bindtap="clearBankIndex">
+      <text>更新题库索引</text><text class="arrow">›</text>
+    </view>
+  </view>
+
+  <view class="menu-group">
+    <view class="menu card" bindtap="clearDrafts">
+      <text>清除本地代码草稿</text><text class="arrow">›</text>
+    </view>
+    <view class="menu card" bindtap="about">
+      <text>关于 / 接口地址</text><text class="arrow">›</text>
+    </view>
+  </view>
+
+  <view wx:if="{{logged}}" class="logout" bindtap="logout">退出登录</view>
+
+  <view class="foot muted">HOJ 教学平台小程序端 · v{{version}}</view>
+</view>

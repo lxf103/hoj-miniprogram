@@ -1,0 +1,105 @@
+<view class="container">
+  <view class="head">
+    <view class="eyebrow">PROBLEM BANK</view>
+    <view class="page-title">题库</view>
+    <view class="stat muted" wx:if="{{totals.problems}}">
+      共 {{totals.problems}} 道题 · {{totals.sheets}} 份题单
+      <text wx:if="{{fromCache}}" class="cache-hint" bindtap="refreshIndex">（更新索引）</text>
+    </view>
+    <view class="stat muted" wx:else>加载题库索引…</view>
+  </view>
+
+  <!-- 顶层 tab -->
+  <view class="tabs">
+    <view wx:for="{{tabs}}" wx:key="key"
+          class="tab {{tab === item.key ? 'tab-on' : ''}}"
+          data-k="{{item.key}}" bindtap="setTab">{{item.label}}</view>
+  </view>
+
+  <!-- 搜索 + 难度（公开题 tab 用服务端搜索） -->
+  <view class="search">
+    <input class="search-input" placeholder="{{tab === 'public' ? '搜索公开题目标题' : '搜索全部 2148 道题'}}"
+           value="{{keyword}}" bindinput="onSearch" confirm-type="search"
+           bindconfirm="{{tab === 'public' ? 'searchPublic' : 'doSearch'}}" />
+    <view class="btn-primary search-btn" bindtap="{{tab === 'public' ? 'searchPublic' : 'doSearch'}}">搜索</view>
+  </view>
+
+  <view class="chips" wx:if="{{tab !== 'public'}}">
+    <view wx:for="{{diffFilters}}" wx:key="key"
+          class="chip {{diffLevel === item.key ? 'chip-on' : ''}}"
+          data-k="{{item.key}}" bindtap="setDiff">{{item.label}}</view>
+  </view>
+
+  <view wx:if="{{err}}" class="err">{{err}}</view>
+
+  <!-- ========== 公开题 ========== -->
+  <block wx:if="{{tab === 'public'}}">
+    <view class="list-title muted">公开题目（{{publicTotal}}）</view>
+    <view class="prob card" wx:for="{{publicList}}" wx:key="key"
+          data-slug="{{item.key}}" bindtap="goDetail">
+      <view class="prob-top">
+        <text class="pid muted">#{{item.id}}</text>
+        <text class="prob-title">{{item.title}}</text>
+        <text wx:if="{{item.solvedText}}" class="solved solved-{{item.solved}}">{{item.solvedText}}</text>
+      </view>
+      <view class="prob-foot muted" wx:if="{{item.source}}">来源：{{item.source}}</view>
+      <view class="prob-foot muted">
+        <text>通过 {{item.accepted}}</text>
+        <text> · 提交 {{item.submit}}</text>
+        <text wx:if="{{item.passRate}}"> · 通过率 {{item.passRate}}</text>
+      </view>
+    </view>
+    <view wx:if="{{publicLoading}}" class="foot muted">加载中…</view>
+    <view wx:elif="{{publicNoMore && publicList.length}}" class="foot muted">没有更多了</view>
+    <view wx:elif="{{!publicList.length}}" class="empty muted">没有公开题目</view>
+  </block>
+
+  <!-- ========== 搜索结果 ========== -->
+  <block wx:elif="{{keyword}}">
+    <view class="list-title muted">
+      搜到 {{resultTotal}} 道题<text wx:if="{{resultCapped}}">（只显示前 80 条，请细化关键词）</text>
+    </view>
+    <view class="prob card" wx:for="{{results}}" wx:key="slug"
+          data-slug="{{item.slug}}" bindtap="goDetail">
+      <view class="prob-top">
+        <text class="prob-title">{{item.title}}</text>
+        <text wx:if="{{item.diffLabel}}" class="tag {{item.diffCls}} p-diff">{{item.diffLabel}}</text>
+      </view>
+      <view class="prob-foot muted">{{item.groupTitle}}</view>
+      <view class="prob-foot muted" wx:if="{{item.provenance}}">{{item.provenance}}</view>
+    </view>
+    <view wx:if="{{!results.length}}" class="empty muted">没有匹配的题目</view>
+  </block>
+
+  <!-- ========== 分类 / 题单 卡片 ========== -->
+  <block wx:else>
+    <view class="list-title muted">
+      {{tab === 'set' ? '专项题单' : '知识点分类'}}（{{groups.length}}）
+    </view>
+
+    <view class="grp card" wx:for="{{groups}}" wx:key="code"
+          data-kind="{{item.kind}}" data-code="{{item.code}}" data-title="{{item.title}}"
+          bindtap="goGroup">
+      <view class="grp-top">
+        <view class="grp-title">{{item.title}}</view>
+        <view class="grp-count">{{item.count}} 题</view>
+      </view>
+
+      <view class="grp-tags" wx:if="{{item.tags.length}}">
+        <text class="ktag" wx:for="{{item.tags}}" wx:for-item="t" wx:key="index">{{t}}</text>
+      </view>
+
+      <view class="grp-bars" wx:if="{{item.diffBars.length}}">
+        <view class="bar" wx:for="{{item.diffBars}}" wx:for-item="b" wx:key="level">
+          <text class="tag {{b.cls}} bar-tag">{{b.label}}</text>
+          <text class="bar-num muted">{{b.count}}</text>
+        </view>
+      </view>
+
+      <view class="grp-go">查看题目 →</view>
+    </view>
+
+    <view wx:if="{{loading}}" class="empty muted">正在加载题库索引（首次约 2.5MB）…</view>
+    <view wx:elif="{{!groups.length && !err}}" class="empty muted">当前难度下没有题单</view>
+  </block>
+</view>

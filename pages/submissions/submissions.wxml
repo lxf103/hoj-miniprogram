@@ -1,0 +1,65 @@
+<view class="container">
+  <view class="head">
+    <view class="eyebrow">MY SUBMISSIONS</view>
+    <view class="page-title">我的提交</view>
+    <view class="desc muted">共 {{total}} 条记录{{list.length ? '，已加载 ' + list.length + ' 条' : ''}}</view>
+  </view>
+
+  <block wx:if="{{!logged}}">
+    <view class="empty muted">登录后查看提交记录</view>
+    <view class="btn-primary login-btn" bindtap="goLogin">去登录</view>
+  </block>
+
+  <block wx:else>
+    <view class="refresh-row">
+      <view class="auto" bindtap="toggleAuto">
+        <text class="box {{autoRefresh ? 'box-on' : ''}}">{{autoRefresh ? '✓' : ''}}</text>
+        <text>自动刷新判题中</text>
+      </view>
+      <view class="manual" bindtap="manualRefresh">手动刷新</view>
+    </view>
+
+    <view class="filter card">
+      <view class="f-item">
+        <view class="f-label muted">题目编号</view>
+        <input class="f-input" placeholder="例: 1003" value="{{pid}}" type="number"
+               bindinput="onPid" bindconfirm="onPidConfirm" confirm-type="search" />
+      </view>
+      <view class="f-item">
+        <view class="f-label muted">编程语言</view>
+        <picker mode="selector" range="{{langLabels}}" value="{{langIdx}}" bindchange="onLang">
+          <view class="f-select">{{langLabels[langIdx]}} ▾</view>
+        </picker>
+      </view>
+      <view class="f-item">
+        <view class="f-label muted">评测结果</view>
+        <picker mode="selector" range="{{statusLabels}}" value="{{statusIdx}}" bindchange="onStatus">
+          <view class="f-select">{{statusLabels[statusIdx]}} ▾</view>
+        </picker>
+      </view>
+    </view>
+    <view class="filter-actions">
+      <view class="mini-btn" bindtap="resetFilter">重置筛选</view>
+    </view>
+
+    <view wx:if="{{err}}" class="err">{{err}}</view>
+
+    <view class="sub-item card" wx:for="{{list}}" wx:key="id"
+          data-id="{{item.id}}" bindtap="goDetail">
+      <view class="si-top">
+        <text class="si-title">#{{item.problemId}} {{item.title}}</text>
+        <text class="status-{{item.statusCls}} si-status">{{item.statusText}}</text>
+      </view>
+      <view class="si-bottom muted">
+        <text>{{item.language}}</text>
+        <text> · {{item.time}}</text>
+        <text> · {{item.memory}}</text>
+        <text> · {{item.inDateText}}</text>
+      </view>
+    </view>
+
+    <view wx:if="{{loading}}" class="foot muted">加载中…</view>
+    <view wx:elif="{{!list.length && !err}}" class="empty muted">暂无提交记录</view>
+    <view wx:elif="{{noMore && list.length}}" class="foot muted">没有更多了</view>
+  </block>
+</view>

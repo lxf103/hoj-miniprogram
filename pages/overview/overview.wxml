@@ -1,0 +1,87 @@
+<view class="container">
+
+  <!-- 未登录 -->
+  <block wx:if="{{!logged}}">
+    <view class="hello">
+      <view class="hi">欢迎使用 HOJ 教学平台</view>
+      <view class="sub muted">登录后查看课程作业、刷题和提交记录。</view>
+    </view>
+    <view class="card login-card" bindtap="goLogin">
+      <view class="lc-text">立即登录</view>
+      <view class="lc-go">→</view>
+    </view>
+  </block>
+
+  <!-- 已登录 -->
+  <block wx:else>
+    <view class="hello">
+      <view class="hi">{{name}}，欢迎回来</view>
+      <view class="sub muted">
+        <text class="role-tag">{{role}}</text>
+        <text wx:if="{{isTeacher}}">　你教授的课程作业与提交情况</text>
+        <text wx:else>　你的课程作业与练习进度</text>
+      </view>
+    </view>
+
+    <view class="stats">
+      <view class="stat card" bindtap="goCourses">
+        <view class="stat-label">课程</view>
+        <view class="stat-num">{{stats.courses}}</view>
+      </view>
+      <view class="stat card">
+        <view class="stat-label">作业总数</view>
+        <view class="stat-num">{{stats.assignments}}</view>
+      </view>
+      <view class="stat card">
+        <view class="stat-label">进行中</view>
+        <view class="stat-num">{{stats.open}}</view>
+      </view>
+    </view>
+
+    <view class="sec-row">
+      <view class="sec-title">{{isTeacher ? '最近作业' : '待办作业'}}</view>
+      <view class="sec-more muted" bindtap="goCourses">全部课程 →</view>
+    </view>
+
+    <block wx:if="{{todos.length}}">
+      <view class="hw card" wx:for="{{todos}}" wx:key="batchId"
+            data-bid="{{item.batchId}}" bindtap="goTodo">
+        <view class="hw-main">
+          <view class="hw-title">{{item.title}}</view>
+          <view class="hw-sub muted">{{item.course}}</view>
+        </view>
+        <view class="hw-right">
+          <view class="due-{{item.due.cls}}">{{item.due.text}}</view>
+          <view class="hw-status">{{item.accepting ? '进行中' : '已截止'}}</view>
+        </view>
+      </view>
+    </block>
+    <view wx:else class="empty muted">
+      <block wx:if="{{loading}}">加载中…</block>
+      <block wx:elif="{{isTeacher}}">暂无作业</block>
+      <block wx:else>暂无待办作业</block>
+    </view>
+
+    <view class="sec-row">
+      <view class="sec-title">最近提交</view>
+      <view class="sec-more muted" bindtap="goSubmissions">全部提交 →</view>
+    </view>
+
+    <block wx:if="{{recent.length}}">
+      <view class="card sub card-tap" wx:for="{{recent}}" wx:key="id"
+            data-id="{{item.id}}" bindtap="goSubmission">
+        <view class="sub-top">
+          <text class="sub-title">#{{item.problemId}} {{item.title}}</text>
+          <text class="status-{{item.statusCls}}">{{item.statusText}}</text>
+        </view>
+        <view class="sub-foot muted">{{item.language}} · {{item.time}} · {{item.memory}} · {{item.inDateText}}</view>
+      </view>
+    </block>
+    <view wx:else class="empty muted">还没有提交记录</view>
+
+    <view class="quick">
+      <view class="quick-btn" bindtap="goProblems">去刷题</view>
+    </view>
+  </block>
+
+</view>

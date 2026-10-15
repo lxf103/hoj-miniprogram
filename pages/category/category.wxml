@@ -1,0 +1,46 @@
+<view class="container">
+  <view wx:if="{{err}}" class="card"><text class="err-text">{{err}}</text></view>
+
+  <view class="card" wx:if="{{group}}">
+    <view class="g-title">{{group.title}}</view>
+    <view class="g-meta muted">
+      <text>{{group.kind === 'set' ? '专项题单' : '知识点分类'}}</text>
+      <text wx:if="{{group.course}}"> · {{group.course}}</text>
+      <text> · 共 {{problems.length}} 题</text>
+    </view>
+    <view class="g-tags" wx:if="{{group.tags.length}}">
+      <text class="ktag" wx:for="{{group.tags}}" wx:key="index">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="search">
+    <input class="search-input" placeholder="在本题单内搜索题目" value="{{keyword}}"
+           bindinput="onSearch" confirm-type="search" />
+  </view>
+
+  <view class="chips">
+    <view wx:for="{{diffFilters}}" wx:key="key"
+          class="chip {{diffLevel === item.key ? 'chip-on' : ''}}"
+          data-k="{{item.key}}" bindtap="setDiff">{{item.label}}</view>
+  </view>
+
+  <view class="list-title muted">题目（{{shown.length}}）</view>
+
+  <view class="p-item card" wx:for="{{shown}}" wx:key="slug"
+        data-slug="{{item.slug}}" bindtap="goDetail">
+    <view class="p-top">
+      <text class="p-title">{{item.title}}</text>
+      <text wx:if="{{item.diffLabel}}" class="tag {{item.diffCls}} p-diff">{{item.diffLabel}}</text>
+    </view>
+    <view class="p-foot muted">
+      <text>{{item.slug}}</text>
+      <text wx:if="{{item.provenance}}"> · {{item.provenance}}</text>
+    </view>
+    <view class="p-foot muted" wx:if="{{item.knowledge.length}}">
+      <text wx:for="{{item.knowledge}}" wx:key="index" class="ktag">{{item}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="empty muted">加载中…</view>
+  <view wx:elif="{{!shown.length && !err}}" class="empty muted">没有符合条件的题目</view>
+</view>

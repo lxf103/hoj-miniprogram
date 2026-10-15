@@ -1,0 +1,60 @@
+.head { padding: 8rpx 4rpx 16rpx; }
+.stat { margin-top: 4rpx; }
+.cache-hint { color: #2563eb; }
+
+.tabs { display: flex; background: #fff; border-radius: 12rpx; padding: 6rpx; margin-bottom: 16rpx; }
+.tab {
+  flex: 1; text-align: center; font-size: 28rpx; color: #6b7280;
+  padding: 14rpx 0; border-radius: 10rpx;
+}
+.tab-on { background: #2563eb; color: #fff; font-weight: 500; }
+
+.search { display: flex; gap: 16rpx; align-items: center; margin-bottom: 16rpx; }
+.search-input {
+  flex: 1; background: #fff; border-radius: 12rpx;
+  padding: 16rpx 24rpx; font-size: 28rpx;
+}
+.search-btn { flex-shrink: 0; padding: 16rpx 28rpx; }
+
+.chips { display: flex; flex-wrap: wrap; gap: 14rpx; margin-bottom: 16rpx; }
+.chip {
+  font-size: 24rpx; color: #6b7280; background: #fff;
+  border-radius: 24rpx; padding: 8rpx 26rpx;
+}
+.chip-on { background: #2563eb; color: #fff; }
+
+.list-title { font-size: 24rpx; margin-bottom: 12rpx; }
+
+/* 题单 / 分类卡片 */
+.grp { padding: 24rpx; }
+.grp-top { display: flex; align-items: flex-start; justify-content: space-between; }
+.grp-title { flex: 1; font-size: 30rpx; font-weight: 600; }
+.grp-count {
+  flex-shrink: 0; margin-left: 16rpx; font-size: 24rpx;
+  color: #2563eb; background: #e8f0fe; border-radius: 20rpx; padding: 2rpx 16rpx;
+}
+.grp-tags { margin-top: 12rpx; }
+.grp-bars { display: flex; flex-wrap: wrap; gap: 18rpx; margin-top: 14rpx; }
+.bar { display: flex; align-items: center; }
+.bar-tag { font-size: 20rpx; }
+.bar-num { font-size: 22rpx; margin-left: 8rpx; }
+.grp-go { margin-top: 14rpx; font-size: 24rpx; color: #2563eb; text-align: right; }
+
+/* 题目条目 */
+.prob { padding: 24rpx; }
+.prob-top { display: flex; align-items: center; }
+.pid { flex-shrink: 0; margin-right: 12rpx; }
+.prob-title { font-size: 30rpx; font-weight: 600; flex: 1; }
+.p-diff { flex-shrink: 0; margin-left: 12rpx; }
+.solved { flex-shrink: 0; margin-left: 12rpx; font-size: 22rpx; border-radius: 8rpx; padding: 2rpx 12rpx; }
+.solved-passed { color: #1a7f37; background: #e6f4ea; }
+.solved-attempted { color: #b76e00; background: #fff4e5; }
+.solved-unattempted { color: #6b7280; background: #f0f2f5; }
+.prob-foot { margin-top: 10rpx; font-size: 22rpx; }
+
+.err {
+  background: #fde8e8; color: #c0392b; border-radius: 10rpx;
+  padding: 16rpx 20rpx; font-size: 26rpx; margin-bottom: 20rpx;
+}
+.foot { text-align: center; padding: 24rpx 0; font-size: 24rpx; }
+.empty { text-align: center; padding: 60rpx 0; }

@@ -1,0 +1,18 @@
+<view class="login-wrap">
+  <view class="logo">HOJ</view>
+  <view class="brand muted">教学平台</view>
+
+  <view wx:if="{{err}}" class="err">{{err}}</view>
+
+  <input class="input" placeholder="用户名 / 学号" value="{{username}}"
+         bindinput="onUsername" confirm-type="next" />
+  <input class="input" password placeholder="密码" value="{{password}}"
+         bindinput="onPassword" confirm-type="done" bindconfirm="doLogin" />
+
+  <view class="btn {{logging ? 'btn-off' : ''}}" bindtap="doLogin">
+    {{logging ? '登录中…' : '登 录'}}
+  </view>
+
+  <view wx:if="{{redirect}}" class="tip muted" bindtap="goBack">暂不登录，返回上一页</view>
+  <view class="tip muted">直连后端 /api/account/login，登录态用 PHPSESSID 维持</view>
+</view>

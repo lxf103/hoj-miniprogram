@@ -1,0 +1,57 @@
+<view class="container">
+  <view wx:if="{{err}}" class="card"><text class="err-text">{{err}}</text></view>
+
+  <view class="card" wx:if="{{offering}}">
+    <view class="c-name">{{offering.course_name || offering.title || '课程'}}</view>
+    <view class="muted c-meta">
+      <text wx:if="{{offering.course_code}}">{{offering.course_code}}</text>
+      <text wx:if="{{offering.term}}"> · {{offering.term}}</text>
+      <text wx:if="{{offering.section}}"> · {{offering.section}}班</text>
+    </view>
+  </view>
+
+  <view class="stats">
+    <view class="stat card">
+      <view class="stat-num">{{summary.total}}</view>
+      <view class="stat-label muted">学生</view>
+    </view>
+    <view class="stat card">
+      <view class="stat-num ok">{{summary.active}}</view>
+      <view class="stat-label muted">有提交</view>
+    </view>
+    <view class="stat card">
+      <view class="stat-num warn">{{summary.idle}}</view>
+      <view class="stat-label muted">零提交</view>
+    </view>
+  </view>
+
+  <input class="search-input" placeholder="搜索姓名 / 学号" value="{{keyword}}" bindinput="onSearch" />
+
+  <view class="chips">
+    <view wx:for="{{sorts}}" wx:key="key"
+          class="chip {{sort === item.key ? 'chip-on' : ''}}"
+          data-k="{{item.key}}" bindtap="setSort">{{item.label}}</view>
+  </view>
+
+  <view class="stu card" wx:for="{{list}}" wx:key="userId"
+        data-uid="{{item.userId}}" data-name="{{item.nick}}"
+        bindtap="goStudent">
+    <view class="stu-avatar">{{item.nick ? item.nick[0] : '?'}}</view>
+    <view class="stu-main">
+      <view class="stu-name">{{item.nick || item.userId}}</view>
+      <view class="muted stu-sub">
+        <text>{{item.studentNo || item.userId}}</text>
+        <text wx:if="{{item.school}}"> · {{item.school}}</text>
+      </view>
+      <view class="muted stu-sub">最后活跃：{{item.lastActiveText}}</view>
+    </view>
+    <view class="stu-right">
+      <view class="stu-passed">通过 {{item.passed}}</view>
+      <view class="muted stu-att">提交 {{item.attempts}}</view>
+      <view class="stu-go">进度 →</view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="empty muted">加载中…</view>
+  <view wx:elif="{{!list.length && !err}}" class="empty muted">暂无学生</view>
+</view>

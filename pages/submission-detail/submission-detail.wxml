@@ -1,0 +1,59 @@
+<view class="container">
+  <view wx:if="{{err}}" class="card"><text class="err-text">{{err}}</text></view>
+
+  <block wx:if="{{sub}}">
+    <view class="card">
+      <view class="s-top">
+        <text class="s-result status-{{sub.statusCls}}">{{sub.statusText}}</text>
+        <text class="muted s-id">#{{sub.id}}</text>
+      </view>
+      <view class="s-title" data-pid="{{sub.problemId}}" bindtap="goProblem">
+        #{{sub.problemId}} {{sub.title}} →
+      </view>
+      <view class="s-meta muted">
+        <text>{{sub.language}}</text>
+        <text> · 用时 {{sub.time}}</text>
+        <text> · 内存 {{sub.memory}}</text>
+      </view>
+      <view class="s-meta muted">
+        <text>提交时间 {{sub.inDate}}</text>
+        <text wx:if="{{sub.codeLength !== ''}}"> · 代码 {{sub.codeLength}} 字节</text>
+      </view>
+      <view class="s-meta muted" wx:if="{{sub.offeringTitle}}">课程：{{sub.offeringTitle}}</view>
+      <view class="s-meta muted" wx:if="{{sub.pending}}">判题中，稍后可下拉刷新…</view>
+    </view>
+
+    <view class="card" wx:if="{{sub.cases.length}}">
+      <view class="sec-title">测试点（{{sub.cases.length}}）</view>
+      <view class="case-row case-head">
+        <text class="c1">测试点</text>
+        <text class="c2">结果</text>
+        <text class="c3">时间</text>
+        <text class="c4">内存</text>
+      </view>
+      <view class="case-row" wx:for="{{sub.cases}}" wx:key="file">
+        <text class="c1">{{item.file}}</text>
+        <text class="c2 {{item.result === 'AC' ? 'status-ac' : 'status-wa'}}">{{item.result}}</text>
+        <text class="c3">{{item.time}}</text>
+        <text class="c4">{{item.memory}}</text>
+      </view>
+    </view>
+
+    <view class="card" wx:if="{{codeLoaded}}">
+      <view class="code-head">
+        <view class="sec-title-inline">源代码{{codeLang ? '（' + codeLang + '）' : ''}}</view>
+        <view class="code-btns">
+          <text class="mini-btn" bindtap="toggleCode">{{showCode ? '收起' : '展开'}}</text>
+          <text class="mini-btn" bindtap="copyCode">复制</text>
+        </view>
+      </view>
+      <view wx:if="{{showCode}}" class="code-box">{{code}}</view>
+    </view>
+
+    <view class="card" wx:elif="{{!sub.pending}}">
+      <view class="muted">该提交不允许查看源码</view>
+    </view>
+  </block>
+
+  <view wx:if="{{loading}}" class="empty muted">加载中…</view>
+</view>

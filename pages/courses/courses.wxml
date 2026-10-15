@@ -1,0 +1,41 @@
+<view class="container">
+  <view class="head">
+    <view class="page-title">课程</view>
+    <view wx:if="{{logged}}" class="muted">共 {{all.length}} 门 · 当前显示 {{list.length}} 门</view>
+  </view>
+
+  <view wx:if="{{logged}}">
+    <input class="search-input" placeholder="搜索课程名 / 课程号 / 负责人"
+           value="{{keyword}}" bindinput="onSearch" />
+  </view>
+
+  <!-- 未登录 -->
+  <block wx:if="{{!logged}}">
+    <view class="empty muted">登录后查看你的课程</view>
+    <view class="btn-primary login-btn" bindtap="goLogin">去登录</view>
+  </block>
+
+  <block wx:else>
+    <view wx:if="{{err}}" class="err">{{err}}</view>
+
+    <view class="course card" wx:for="{{list}}" wx:key="offeringId"
+          data-oid="{{item.offeringId}}" bindtap="goDetail">
+      <view class="c-row">
+        <view class="c-name">{{item.name}}</view>
+        <view wx:if="{{item.roleText}}" class="c-role">{{item.roleText}}</view>
+      </view>
+      <view class="c-meta muted">
+        <text wx:if="{{item.code}}">{{item.code}}</text>
+        <text wx:if="{{item.term}}"> · {{item.term}}</text>
+        <text wx:if="{{item.section}}"> · {{item.section}}班</text>
+      </view>
+      <view class="c-title" wx:if="{{item.title && item.title !== item.name}}">{{item.title}}</view>
+      <view class="c-go">查看作业 →</view>
+    </view>
+
+    <view wx:if="{{loading}}" class="empty muted">加载中…</view>
+    <view wx:elif="{{!list.length && !err}}" class="empty muted">
+      {{keyword ? '没有匹配的课程' : '暂无课程'}}
+    </view>
+  </block>
+</view>

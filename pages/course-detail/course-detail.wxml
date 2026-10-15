@@ -1,0 +1,57 @@
+<view class="container">
+  <view wx:if="{{err}}" class="card"><text class="err-text">{{err}}</text></view>
+
+  <view class="card" wx:if="{{offering}}">
+    <view class="cd-name">{{offering.course_name || offering.title || '课程'}}</view>
+    <view class="cd-meta muted">
+      <text wx:if="{{offering.course_code}}">{{offering.course_code}}</text>
+      <text wx:if="{{offering.term}}"> · {{offering.term}}</text>
+      <text wx:if="{{offering.section}}"> · {{offering.section}}班</text>
+    </view>
+    <view class="cd-meta muted">
+      <text wx:if="{{offering.teacher_id}}">负责人：{{offering.teacher_id}}</text>
+      <text wx:if="{{isTeacher && totalStudents !== null}}">　学生 {{totalStudents}} 人</text>
+      <text wx:if="{{offering.role}}">　身份：{{offering.role}}</text>
+    </view>
+  </view>
+
+  <!-- 教师：学生名单入口 -->
+  <view class="card te-card" wx:if="{{isTeacher}}" bindtap="goStudents">
+    <view class="te-main">
+      <view class="te-title">学生名单</view>
+      <view class="muted te-sub">
+        <text wx:if="{{totalStudents !== null}}">{{totalStudents}} 名学生</text>
+        <text wx:else>查看学生与各自进度</text>
+        <text> · 可查看每人每题的完成情况与代码</text>
+      </view>
+    </view>
+    <view class="te-go">→</view>
+  </view>
+
+  <view class="sec-title">作业（{{batches.length}}）</view>
+
+  <view class="hw card" wx:for="{{batches}}" wx:key="id"
+        data-bid="{{item.id}}" bindtap="goBatch">
+    <view class="hw-top">
+      <view class="hw-title">{{item.seq ? item.seq + '. ' : ''}}{{item.title}}</view>
+      <view class="due-{{item.dueCls}}">{{item.due.pastDue ? '已截止' : '进行中'}}</view>
+    </view>
+    <view class="hw-sub muted">
+      <text wx:if="{{!isTeacher && item.progressText}}">{{item.progressText}}</text>
+      <text wx:if="{{isTeacher && item.teaches}}">{{item.teaches}}</text>
+      <text wx:if="{{isTeacher && item.submitText}}"> · {{item.submitText}}</text>
+      <text wx:if="{{isTeacher && item.doneText}}"> · {{item.doneText}}</text>
+    </view>
+    <view class="hw-due muted">{{item.dueText}}</view>
+
+    <block wx:if="{{isTeacher}}">
+      <view class="rate-bar"><view class="rate-in" style="width: {{item.rateNum}}%"></view></view>
+      <view class="muted rate-text">完成率 {{item.rate || '0%'}}</view>
+    </block>
+
+    <view class="hw-go">查看题目 →</view>
+  </view>
+
+  <view wx:if="{{loading}}" class="empty muted">加载中…</view>
+  <view wx:elif="{{!batches.length && !err}}" class="empty muted">该课程暂无作业</view>
+</view>

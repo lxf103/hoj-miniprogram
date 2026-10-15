@@ -1,0 +1,55 @@
+<view class="container">
+  <view wx:if="{{err}}" class="card"><text class="err-text">{{err}}</text></view>
+
+  <!-- 学生 + 总成绩 -->
+  <view class="card" wx:if="{{student}}">
+    <view class="s-name">{{student.nick || student.user_id}}</view>
+    <view class="muted s-sub">学号 {{student.student_no || student.user_id}}</view>
+
+    <view class="score-row" wx:if="{{summary}}">
+      <view class="score-main">
+        <text class="score-num">{{summary.totalScore}}</text>
+        <text class="muted score-total"> / {{summary.totalWeight}} 分</text>
+      </view>
+      <view class="score-rate">得分率 {{summary.rate}}%</view>
+    </view>
+
+    <view class="bar"><view class="bar-in" style="width: {{summary.rate}}%"></view></view>
+
+    <view class="muted s-sub" wx:if="{{summary}}">
+      已通过 {{summary.passedProblems}} / {{summary.totalProblems}} 题 · 未提交 {{summary.unsubmitted}} 题
+    </view>
+  </view>
+
+  <!-- 每个作业一本小账 -->
+  <view class="batch card" wx:for="{{batches}}" wx:key="batchId">
+    <view class="b-top">
+      <view class="b-title">{{item.title}}</view>
+      <view class="b-score">{{item.score}} / {{item.totalWeight}}</view>
+    </view>
+    <view class="muted b-sub">通过 {{item.passedCount}} / {{item.problems.length}} 题</view>
+
+    <view class="p-row" wx:for="{{item.problems}}" wx:for-item="p" wx:key="problemId"
+          data-sub="{{p.submissionId}}" data-pid="{{p.problemId}}"
+          bindtap="openProblem">
+      <view class="p-main">
+        <view class="p-title">{{p.title}}</view>
+        <view class="muted p-sub">
+          <text>#{{p.problemId}}</text>
+          <text wx:if="{{p.weight}}"> · {{p.weight}} 分</text>
+          <text wx:if="{{p.attempts}}"> · 提交 {{p.attempts}} 次</text>
+          <text wx:if="{{p.submitted === false}}"> · 未提交</text>
+        </view>
+      </view>
+      <view class="p-right">
+        <view class="status-{{p.statusCls}} p-status">{{p.statusText}}</view>
+        <view class="muted p-score" wx:if="{{p.submitted}}">{{p.score}} 分</view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="empty muted">加载中…</view>
+  <view wx:elif="{{!batches.length && !err}}" class="empty muted">该学生暂无作业记录</view>
+
+  <view class="muted tip">提示：点有提交的题目可直接查看代码与判题详情</view>
+</view>

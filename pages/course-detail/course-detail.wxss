@@ -1,0 +1,29 @@
+.cd-name { font-size: 38rpx; font-weight: 700; }
+.cd-meta { margin-top: 8rpx; font-size: 24rpx; }
+.sec-title { font-size: 32rpx; font-weight: 600; margin: 24rpx 0 12rpx; }
+
+.hw { padding: 24rpx; }
+.hw-top { display: flex; align-items: center; justify-content: space-between; }
+.hw-title { font-size: 30rpx; font-weight: 500; flex: 1; }
+.hw-sub { margin-top: 8rpx; font-size: 24rpx; }
+.hw-due { margin-top: 6rpx; font-size: 22rpx; }
+.hw-go { margin-top: 12rpx; font-size: 24rpx; color: #2563eb; text-align: right; }
+
+.due-open { font-size: 22rpx; color: #2563eb; flex-shrink: 0; }
+.due-urgent { font-size: 22rpx; color: #c0392b; font-weight: 600; flex-shrink: 0; }
+.due-over { font-size: 22rpx; color: #9ca3af; flex-shrink: 0; }
+
+.err-text { color: #c0392b; }
+.empty { text-align: center; padding: 80rpx 0; color: #8a8f99; }
+
+/* 教师：学生名单入口 */
+.te-card { display: flex; align-items: center; justify-content: space-between; }
+.te-main { flex: 1; min-width: 0; }
+.te-title { font-size: 32rpx; font-weight: 600; color: #2563eb; }
+.te-sub { margin-top: 6rpx; font-size: 22rpx; }
+.te-go { font-size: 36rpx; color: #2563eb; flex-shrink: 0; margin-left: 12rpx; }
+
+/* 教师：作业完成率 */
+.rate-bar { height: 10rpx; background: #eef0f3; border-radius: 5rpx; margin-top: 12rpx; overflow: hidden; }
+.rate-in { height: 10rpx; background: #2563eb; border-radius: 5rpx; }
+.rate-text { margin-top: 6rpx; font-size: 22rpx; }

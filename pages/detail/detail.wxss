@@ -1,0 +1,67 @@
+.d-top { display: flex; align-items: center; }
+.d-title { font-size: 36rpx; font-weight: 700; margin-left: 12rpx; }
+.meta { margin-top: 10rpx; font-size: 24rpx; }
+.tags { margin-top: 12rpx; }
+
+.sec-title { font-size: 26rpx; color: #2563eb; margin: 20rpx 0 8rpx; font-weight: 500; }
+.sec-title-inline { font-size: 28rpx; font-weight: 600; }
+.sec-body { font-size: 28rpx; color: #1f2329; white-space: pre-wrap; word-break: break-word; }
+
+.sample-box { margin-top: 8rpx; }
+.sample-label { font-size: 22rpx; margin-top: 10rpx; }
+.sample {
+  background: #f5f6f8;
+  border-radius: 8rpx;
+  padding: 12rpx 16rpx;
+  font-family: monospace;
+  font-size: 26rpx;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.code-head { display: flex; align-items: center; justify-content: space-between; }
+.lang-row { display: flex; align-items: center; }
+.lang {
+  font-weight: 500; font-size: 26rpx; color: #2563eb;
+  border: 2rpx solid #dbe4f5; border-radius: 8rpx; padding: 4rpx 20rpx;
+}
+.code {
+  width: 100%;
+  min-height: 300rpx;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  border-radius: 12rpx;
+  padding: 20rpx;
+  font-family: monospace;
+  font-size: 26rpx;
+  box-sizing: border-box;
+  margin-top: 16rpx;
+}
+.code-actions { display: flex; gap: 16rpx; margin-top: 16rpx; }
+.mini-btn {
+  font-size: 24rpx; color: #2563eb;
+  border: 2rpx solid #dbe4f5; border-radius: 10rpx; padding: 10rpx 24rpx;
+}
+.mini-btn.full { display: block; text-align: center; margin-top: 20rpx; padding: 16rpx 0; }
+.hint { font-size: 22rpx; color: #8a8f99; align-self: center; }
+
+.submit-btn {
+  margin-top: 20rpx;
+  background: #2563eb; color: #fff; border-radius: 12rpx;
+  padding: 22rpx 0; text-align: center; font-size: 30rpx;
+}
+.btn-disabled { background: #9bb4e8; }
+
+.res-line { display: flex; align-items: center; }
+.res-text { font-size: 32rpx; }
+.res-meta { margin-top: 8rpx; font-size: 24rpx; }
+
+.case-row { display: flex; font-size: 24rpx; padding: 8rpx 0; border-bottom: 2rpx solid #f0f2f5; }
+.case-head { color: #8a8f99; font-size: 22rpx; }
+.c1 { flex: 2; } .c2 { flex: 1.4; } .c3 { flex: 1.4; } .c4 { flex: 1.6; }
+
+.h-row { display: flex; align-items: center; justify-content: space-between; padding: 12rpx 0; border-bottom: 2rpx solid #f5f6f8; }
+.h-status { font-size: 26rpx; }
+.h-meta { font-size: 22rpx; }
+
+.err-text { color: #c0392b; }

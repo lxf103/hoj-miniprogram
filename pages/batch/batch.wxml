@@ -1,0 +1,52 @@
+<view class="container">
+  <view wx:if="{{err}}" class="card"><text class="err-text">{{err}}</text></view>
+
+  <view class="card" wx:if="{{batch}}">
+    <view class="b-title">{{batch.seq ? batch.seq + '. ' : ''}}{{batch.title}}</view>
+    <view class="b-meta muted">
+      <text wx:if="{{offering.course_name}}">{{offering.course_name}}</text>
+      <text wx:if="{{offering.term}}"> · {{offering.term}}</text>
+    </view>
+    <view class="b-due due-{{batch.due.cls}}">{{batch.due.text}}</view>
+    <view wx:if="{{batch.description}}" class="b-desc">{{batch.description}}</view>
+
+    <!-- 学生看自己的完成进度；教师看的是班级情况（这个 passed 是教师自己的，不能当班级进度） -->
+    <block wx:if="{{!isTeacher}}">
+      <view class="b-progress">
+        <text class="muted">我的进度</text>
+        <text class="b-count">{{passedCount}} / {{problems.length}}</text>
+      </view>
+      <view class="b-bar">
+        <view class="b-bar-in" style="width: {{progressPct}}%"></view>
+      </view>
+    </block>
+    <block wx:else>
+      <view class="b-progress">
+        <text class="muted">班级完成情况</text>
+        <text class="b-count">共 {{problems.length}} 题</text>
+      </view>
+      <view class="te-link" bindtap="goStudents">查看学生名单与进度 →</view>
+    </block>
+  </view>
+
+  <view class="sec-title">题目（{{problems.length}}）</view>
+
+  <view class="p-item card" wx:for="{{problems}}" wx:key="problemId"
+        data-pid="{{item.problemId}}" bindtap="goProblem">
+    <view class="p-top">
+      <text class="p-seq muted">{{item.seq}}</text>
+      <text class="p-title">{{item.title}}</text>
+      <text wx:if="{{item.passed}}" class="p-flag p-ok">已通过</text>
+      <text wx:elif="{{item.attempts}}" class="p-flag p-try">尝试 {{item.attempts}}</text>
+    </view>
+    <view class="p-foot muted">
+      <text>#{{item.problemId}}</text>
+      <text wx:if="{{item.score !== null && item.score !== undefined}}"> · {{item.score}} 分</text>
+      <text wx:if="{{!item.required}}"> · 选做</text>
+      <text wx:if="{{item.hint}}"> · {{item.hint}}</text>
+    </view>
+  </view>
+
+  <view wx:if="{{loading}}" class="empty muted">加载中…</view>
+  <view wx:elif="{{!problems.length && !err}}" class="empty muted">该作业暂无题目</view>
+</view>
