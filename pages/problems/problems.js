@@ -109,6 +109,16 @@ Page({
 
   doSearch() { this.apply(); },
 
+  /**
+   * 搜索按钮 / 回车统一入口。
+   * 注意：WXML 的事件名必须是静态字符串，不能写 bindtap="{{条件 ? 'a' : 'b'}}"，
+   * 所以分支放在这里。
+   */
+  onSearchSubmit() {
+    if (this.data.tab === 'public') this.loadPublic(true);
+    else this.doSearch();
+  },
+
   clearSearch() {
     this.setData({ keyword: '' }, () => this.apply());
   },

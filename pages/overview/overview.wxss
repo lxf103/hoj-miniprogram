@@ -1,3 +1,15 @@
+/* 演示模式提示条 */
+.demo-strip {
+  display: flex; align-items: center;
+  background: #e8f0fe; border: 2rpx solid #c7dafc;
+  border-radius: 12rpx; padding: 14rpx 20rpx; margin-bottom: 20rpx;
+}
+.demo-strip-tag {
+  flex-shrink: 0; background: #2563eb; color: #fff;
+  font-size: 20rpx; border-radius: 6rpx; padding: 2rpx 12rpx; margin-right: 14rpx;
+}
+.demo-strip-txt { font-size: 22rpx; color: #3b5b96; }
+
 .hello { padding: 16rpx 4rpx 8rpx; }
 .hi { font-size: 46rpx; font-weight: 700; }
 .sub { margin-top: 8rpx; }

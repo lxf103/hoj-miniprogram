@@ -31,3 +31,4 @@
   text-align: center; font-size: 30rpx;
 }
 .foot { text-align: center; margin: 40rpx 0 20rpx; font-size: 22rpx; }
+.foot-demo { color: #2563eb; }

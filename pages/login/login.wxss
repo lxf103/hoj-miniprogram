@@ -19,3 +19,21 @@
   padding: 16rpx 20rpx; font-size: 26rpx; margin-bottom: 24rpx;
 }
 .tip { text-align: center; margin-top: 28rpx; font-size: 24rpx; }
+
+/* 演示模式 */
+.demo-box {
+  background: #e8f0fe; border: 2rpx solid #c7dafc;
+  border-radius: 14rpx; padding: 24rpx; margin-bottom: 28rpx;
+}
+.demo-badge {
+  display: inline-block; background: #2563eb; color: #fff;
+  font-size: 22rpx; border-radius: 6rpx; padding: 2rpx 14rpx;
+}
+.demo-sub { margin: 12rpx 0 16rpx; font-size: 24rpx; }
+.demo-row { display: flex; gap: 16rpx; }
+.demo-btn {
+  flex: 1; background: #fff; color: #2563eb;
+  border: 2rpx solid #2563eb; border-radius: 10rpx;
+  padding: 18rpx 0; text-align: center; font-size: 27rpx;
+}
+.demo-sep { text-align: center; font-size: 22rpx; margin-bottom: 24rpx; }

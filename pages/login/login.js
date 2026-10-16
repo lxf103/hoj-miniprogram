@@ -19,7 +19,8 @@ Page({
     password: '',
     logging: false,
     redirect: '',
-    err: ''
+    err: '',
+    demo: false
   },
 
   onLoad(options) {
@@ -27,7 +28,19 @@ Page({
     // 记住上次登录的用户名，省得每次重敲（密码不落地存储）
     var last = '';
     try { last = wx.getStorageSync(KEY_LAST_USER) || ''; } catch (e) {}
-    this.setData({ redirect: redirect, username: last });
+    this.setData({
+      redirect: redirect,
+      username: last,
+      demo: store.isDemo()
+    });
+  },
+
+  /** 演示模式：一键以教师 / 学生身份进入，方便给老师演示两种视角 */
+  goDemo(e) {
+    if (this.data.logging) return;
+    var role = e.currentTarget.dataset.role;
+    var uname = role === 'teacher' ? 'admin' : 'student02';
+    this.setData({ username: uname, password: 'demo', err: '' }, () => this.doLogin());
   },
 
   onUsername(e) { this.setData({ username: e.detail.value, err: '' }); },

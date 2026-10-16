@@ -1,5 +1,11 @@
 <view class="container">
 
+  <!-- 演示模式提示：避免老师误以为是线上真实数据 -->
+  <view wx:if="{{demo}}" class="demo-strip">
+    <text class="demo-strip-tag">演示模式</text>
+    <text class="demo-strip-txt">当前展示的是内置样例数据，用于查看功能框架</text>
+  </view>
+
   <!-- 未登录 -->
   <block wx:if="{{!logged}}">
     <view class="hello">

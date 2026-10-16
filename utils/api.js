@@ -131,7 +131,9 @@ function normalizeBatchProblem(p) {
   return {
     batchProblemId: p.batch_problem_id,
     problemId: p.problem_id,
-    key: p.problem_id != null ? String(p.problem_id) : '',
+    // 演示数据里作业题是 slug（真实接口是数字 id），detail 页两种都能吃
+    slug: p.slug || '',
+    key: p.slug || (p.problem_id != null ? String(p.problem_id) : ''),
     seq: p.seq,
     score: p.score,
     required: p.required !== false,

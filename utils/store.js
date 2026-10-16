@@ -16,6 +16,11 @@ function app() {
   return getApp();
 }
 
+/** 是否处于演示模式（内置样例数据，不联网）。开关在 app.js 的 globalData.demoMode */
+function isDemo() {
+  try { return !!app().globalData.demoMode; } catch (e) { return false; }
+}
+
 /** 当前用户对象（含 user/roles/portal 等，来自 /api/me） */
 function getUser() {
   return app().globalData.user || null;
@@ -133,6 +138,7 @@ function currentPath() {
 
 module.exports = {
   ROLE_TEXT: ROLE_TEXT,
+  isDemo: isDemo,
   getUser: getUser,
   setUser: setUser,
   getCookie: getCookie,

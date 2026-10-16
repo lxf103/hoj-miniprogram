@@ -20,8 +20,8 @@
   <view class="search">
     <input class="search-input" placeholder="{{tab === 'public' ? '搜索公开题目标题' : '搜索全部 2148 道题'}}"
            value="{{keyword}}" bindinput="onSearch" confirm-type="search"
-           bindconfirm="{{tab === 'public' ? 'searchPublic' : 'doSearch'}}" />
-    <view class="btn-primary search-btn" bindtap="{{tab === 'public' ? 'searchPublic' : 'doSearch'}}">搜索</view>
+           bindconfirm="onSearchSubmit" />
+    <view class="btn-primary search-btn" bindtap="onSearchSubmit">搜索</view>
   </view>
 
   <view class="chips" wx:if="{{tab !== 'public'}}">

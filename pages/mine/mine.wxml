@@ -59,5 +59,8 @@
 
   <view wx:if="{{logged}}" class="logout" bindtap="logout">退出登录</view>
 
-  <view class="foot muted">HOJ 教学平台小程序端 · v{{version}}</view>
+  <view class="foot muted">
+    HOJ 教学平台小程序端 · v{{version}}
+    <text wx:if="{{demo}}" class="foot-demo">（演示模式）</text>
+  </view>
 </view>

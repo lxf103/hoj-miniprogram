@@ -2,6 +2,19 @@
   <view class="logo">HOJ</view>
   <view class="brand muted">教学平台</view>
 
+  <!-- 演示模式：一键切换教师 / 学生视角 -->
+  <block wx:if="{{demo}}">
+    <view class="demo-box">
+      <view class="demo-badge">演示模式</view>
+      <view class="demo-sub muted">无需后端，内置样例数据。选一个身份直接体验：</view>
+      <view class="demo-row">
+        <view class="demo-btn" data-role="teacher" bindtap="goDemo">以教师身份进入</view>
+        <view class="demo-btn" data-role="student" bindtap="goDemo">以学生身份进入</view>
+      </view>
+    </view>
+    <view class="demo-sep muted">— 或手动登录（演示模式下任意账号均可） —</view>
+  </block>
+
   <view wx:if="{{err}}" class="err">{{err}}</view>
 
   <input class="input" placeholder="用户名 / 学号" value="{{username}}"
@@ -14,5 +27,5 @@
   </view>
 
   <view wx:if="{{redirect}}" class="tip muted" bindtap="goBack">暂不登录，返回上一页</view>
-  <view class="tip muted">直连后端 /api/account/login，登录态用 PHPSESSID 维持</view>
+  <view class="tip muted">{{demo ? '演示模式：数据为内置样例，仅供展示框架' : '直连后端 /api/account/login，登录态用 PHPSESSID 维持'}}</view>
 </view>

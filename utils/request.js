@@ -9,6 +9,7 @@
 // 失败时 reject 一个 { statusCode, code, message } 对象，页面可据此判断。
 
 var store = require('./store.js');
+var demo = require('./demo.js');
 
 // 默认超时：判题机在后端跑，普通接口 15s 足够
 var TIMEOUT = 15000;
@@ -54,6 +55,13 @@ function captureCookies(header) {
 function request(options) {
   var opts = options || {};
   var silent = !!opts.silent;
+
+  // 演示模式：完全不走网络，直接返回内置样例数据。
+  // 页面与 api.js 层完全无感 —— 它们拿到的结构和真实接口一致。
+  if (store.isDemo()) {
+    var handled = demo.handle(opts.method || 'GET', opts.url, opts.data || {});
+    if (handled) return handled;
+  }
 
   return new Promise(function (resolve, reject) {
     var header = {

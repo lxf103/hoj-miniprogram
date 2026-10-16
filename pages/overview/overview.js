@@ -12,7 +12,8 @@ Page({
     stats: { courses: 0, assignments: 0, open: 0 },
     todos: [],
     recent: [],
-    loading: false
+    loading: false,
+    demo: false
   },
 
   onShow() { this.refresh(); },
@@ -27,7 +28,8 @@ Page({
       logged: logged,
       name: store.displayName(),
       role: store.roleText(),
-      isTeacher: store.isTeacher()
+      isTeacher: store.isTeacher(),
+      demo: store.isDemo()
     });
 
     if (!logged) {

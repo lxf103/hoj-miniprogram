@@ -1,5 +1,5 @@
 {
-  "description": "HOJ 学生端小程序骨架（假数据演示版）",
+  "description": "HOJ 教学平台小程序端（演示版：内置样例数据，不依赖后端）",
   "packOptions": {
     "ignore": [],
     "include": []
@@ -29,7 +29,7 @@
   },
   "compileType": "miniprogram",
   "libVersion": "2.19.4",
-  "appid": "wxa87ca0d086182f2d",
+  "appid": "wx994db4d7f1b56c25",
   "projectname": "hoj-miniprogram",
   "condition": {},
   "simulatorPluginLibVersion": {},

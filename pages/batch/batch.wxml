@@ -31,8 +31,8 @@
 
   <view class="sec-title">题目（{{problems.length}}）</view>
 
-  <view class="p-item card" wx:for="{{problems}}" wx:key="problemId"
-        data-pid="{{item.problemId}}" bindtap="goProblem">
+  <view class="p-item card" wx:for="{{problems}}" wx:key="key"
+        data-pid="{{item.key}}" bindtap="goProblem">
     <view class="p-top">
       <text class="p-seq muted">{{item.seq}}</text>
       <text class="p-title">{{item.title}}</text>
