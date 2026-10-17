@@ -2,6 +2,7 @@
 // 数据源：GET /api/submissions/{id} 和 /api/submissions/{id}/code
 var api = require('../../utils/api.js');
 var fmt = require('../../utils/format.js');
+var share = require('../../utils/share.js');
 
 Page({
   data: {
@@ -68,5 +69,14 @@ Page({
     var pid = this.data.sub && this.data.sub.problemId;
     if (!pid) return;
     wx.navigateTo({ url: '/pages/detail/detail?pid=' + pid });
-  }
+  },
+
+  // ---- 分享 ----
+  onShareAppMessage: share.build(function () {
+    var s = this.data.sub || {};
+    return {
+      title: '提交 #' + (s.id || '') + ' ' + (s.statusText || '') + ' · HOJ',
+      path: '/pages/submission-detail/submission-detail?id=' + this.data.id
+    };
+  })
 });

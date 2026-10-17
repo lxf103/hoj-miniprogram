@@ -2,6 +2,7 @@
 // 数据源：GET /api/batches/{bid} -> { batch, offering, problems[] }
 var api = require('../../utils/api.js');
 var store = require('../../utils/store.js');
+var share = require('../../utils/share.js');
 
 Page({
   data: {
@@ -63,5 +64,14 @@ Page({
     var oid = this.data.offering && this.data.offering.offering_id;
     if (!oid) return;
     wx.navigateTo({ url: '/pages/students/students?oid=' + oid });
-  }
+  },
+
+  // ---- 分享 ----
+  onShareAppMessage: share.build(function () {
+    var b = this.data.batch || {};
+    return {
+      title: (b.title || '作业') + ' · HOJ 教学平台',
+      path: '/pages/batch/batch?bid=' + this.data.bid
+    };
+  })
 });

@@ -2,6 +2,7 @@
 var api = require('../../utils/api.js');
 var store = require('../../utils/store.js');
 var fmt = require('../../utils/format.js');
+var share = require('../../utils/share.js');
 
 Page({
   data: {
@@ -110,5 +111,9 @@ Page({
 
   goCourses() { wx.switchTab({ url: '/pages/courses/courses' }); },
   goProblems() { wx.switchTab({ url: '/pages/problems/problems' }); },
-  goSubmissions() { wx.switchTab({ url: '/pages/submissions/submissions' }); }
+  goSubmissions() { wx.switchTab({ url: '/pages/submissions/submissions' }); },
+
+  // ---- 分享 ----
+  onShareAppMessage: share.app,
+  onShareTimeline: share.timeline()
 });

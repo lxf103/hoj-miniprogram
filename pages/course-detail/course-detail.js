@@ -2,6 +2,7 @@
 // 数据源：GET /api/offerings/{oid} -> { offering, batches[], total_students, insights }
 var api = require('../../utils/api.js');
 var store = require('../../utils/store.js');
+var share = require('../../utils/share.js');
 
 Page({
   data: {
@@ -81,5 +82,14 @@ Page({
   goStudents() {
     if (!this.data.oid) return;
     wx.navigateTo({ url: '/pages/students/students?oid=' + this.data.oid });
-  }
+  },
+
+  // ---- 分享 ----
+  onShareAppMessage: share.build(function () {
+    var o = this.data.offering || {};
+    return {
+      title: (o.course_name || o.title || '课程') + ' · HOJ 教学平台',
+      path: '/pages/course-detail/course-detail?oid=' + this.data.oid
+    };
+  })
 });

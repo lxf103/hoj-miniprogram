@@ -52,6 +52,31 @@ function captureCookies(header) {
   return pairs.join('; ');
 }
 
+// 防止并发请求同时失败时弹出多个登录页
+var goingLogin = false;
+
+/**
+ * 登录态失效时，清掉本地状态并引导到登录页。
+ * 清状态但停在原页 → 用户只会看到一个空白页面，不知道该干什么，所以必须导航。
+ */
+function handleUnauthorized() {
+  store.clear();
+  if (goingLogin) return;
+
+  // 已经在登录页就别再跳（否则会重复压栈）
+  var route = '';
+  try {
+    var pages = getCurrentPages();
+    if (pages.length) route = pages[pages.length - 1].route || '';
+  } catch (e) {}
+  if (route.indexOf('pages/login/login') > -1) return;
+
+  goingLogin = true;
+  setTimeout(function () { goingLogin = false; }, 2000);
+  // 带上当前页面，登录完能回到原地
+  store.toLogin(store.currentPath());
+}
+
 function request(options) {
   var opts = options || {};
   var silent = !!opts.silent;
@@ -90,8 +115,13 @@ function request(options) {
         var body = res.data;
 
         if (status === 401 || status === 403) {
-          store.clear();
-          if (!silent) toast('登录已失效，请重新登录');
+          // 登录接口本身返回 401 是「账号密码错」，不是「登录态失效」，
+          // 不能把用户又踢回登录页（他本来就在登录页）。
+          var isLoginCall = opts.url === '/api/account/login';
+          if (!isLoginCall) {
+            if (!silent) toast('登录已失效，请重新登录');
+            handleUnauthorized();
+          }
           reject(makeError(status, 'UNAUTHORIZED', '登录已失效'));
           return;
         }

@@ -3,6 +3,7 @@
 var api = require('../../utils/api.js');
 var fmt = require('../../utils/format.js');
 var store = require('../../utils/store.js');
+var share = require('../../utils/share.js');
 
 // 后端 language 是数字 id（实测 6=Python）
 var LANGS = [
@@ -157,5 +158,8 @@ Page({
   },
 
   goProblems() { wx.switchTab({ url: '/pages/problems/problems' }); },
-  goLogin() { store.toLogin('/pages/submissions/submissions'); }
+  goLogin() { store.toLogin('/pages/submissions/submissions'); },
+
+  // ---- 分享 ----
+  onShareAppMessage: share.page('HOJ 教学平台 · 提交记录与判题结果', '/pages/submissions/submissions')
 });

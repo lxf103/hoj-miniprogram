@@ -7,6 +7,7 @@
 var api = require('../../utils/api.js');
 var fmt = require('../../utils/format.js');
 var store = require('../../utils/store.js');
+var share = require('../../utils/share.js');
 
 // 搜索结果一次最多渲染这么多，避免 setData 太大卡顿
 var MAX_RESULTS = 80;
@@ -221,5 +222,9 @@ Page({
     this.loadPublic(true);
   },
 
-  goLogin() { store.toLogin('/pages/problems/problems'); }
+  goLogin() { store.toLogin('/pages/problems/problems'); },
+
+  // ---- 分享 ----
+  onShareAppMessage: share.page('HOJ 题库 · 24 个分类 / 2148 道题', '/pages/problems/problems'),
+  onShareTimeline: share.timeline('HOJ 题库 · 一起来刷题')
 });

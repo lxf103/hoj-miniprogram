@@ -1,6 +1,7 @@
 // pages/students/students.js —— 教师：教学班学生名单（带通过数/提交数/最后活跃）
 // GET /api/offerings/{oid}/students
 var api = require('../../utils/api.js');
+var share = require('../../utils/share.js');
 
 Page({
   data: {
@@ -87,5 +88,14 @@ Page({
            '&uid=' + encodeURIComponent(ds.uid) +
            '&name=' + encodeURIComponent(ds.name || '')
     });
-  }
+  },
+
+  // ---- 分享 ----
+  onShareAppMessage: share.build(function () {
+    var o = this.data.offering || {};
+    return {
+      title: (o.course_name || '课程') + ' · 学生名单',
+      path: '/pages/students/students?oid=' + this.data.oid
+    };
+  })
 });

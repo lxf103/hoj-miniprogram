@@ -1,6 +1,7 @@
 // pages/courses/courses.js —— 课程列表：GET /api/courses（教师=我教的课，学生=我选的课）
 var api = require('../../utils/api.js');
 var store = require('../../utils/store.js');
+var share = require('../../utils/share.js');
 
 Page({
   data: {
@@ -51,5 +52,8 @@ Page({
     wx.navigateTo({ url: '/pages/course-detail/course-detail?oid=' + oid });
   },
 
-  goLogin() { store.toLogin('/pages/courses/courses'); }
+  goLogin() { store.toLogin('/pages/courses/courses'); },
+
+  // ---- 分享 ----
+  onShareAppMessage: share.page('HOJ 教学平台 · 课程与作业', '/pages/courses/courses')
 });

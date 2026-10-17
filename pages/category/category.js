@@ -2,6 +2,7 @@
 // 数据来自本地缓存的题库索引（utils/api.problemSets），不额外打网络。
 var api = require('../../utils/api.js');
 var fmt = require('../../utils/format.js');
+var share = require('../../utils/share.js');
 
 Page({
   data: {
@@ -99,5 +100,15 @@ Page({
     var slug = e.currentTarget.dataset.slug;
     if (!slug) return;
     wx.navigateTo({ url: '/pages/detail/detail?pid=' + encodeURIComponent(slug) });
-  }
+  },
+
+  // ---- 分享 ----
+  onShareAppMessage: share.build(function () {
+    var g = this.data.group || {};
+    return {
+      title: (g.title || '题单') + ' · HOJ 题库',
+      path: '/pages/category/category?kind=' + this.data.kind +
+            '&code=' + encodeURIComponent(this.data.code)
+    };
+  })
 });

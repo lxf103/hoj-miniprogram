@@ -3,6 +3,7 @@
 // 每个作业下每道题给出 result / label / attempts / score / submission_id，
 // 点有提交的题可以直接跳去看代码。
 var api = require('../../utils/api.js');
+var share = require('../../utils/share.js');
 
 Page({
   data: {
@@ -61,5 +62,15 @@ Page({
     } else if (ds.pid) {
       wx.navigateTo({ url: '/pages/detail/detail?pid=' + ds.pid });
     }
-  }
+  },
+
+  // ---- 分享 ----
+  onShareAppMessage: share.build(function () {
+    var s = this.data.student || {};
+    return {
+      title: (s.nick || '学生') + ' · 学习进度',
+      path: '/pages/student-progress/student-progress?oid=' + this.data.oid +
+            '&uid=' + encodeURIComponent(this.data.uid)
+    };
+  })
 });

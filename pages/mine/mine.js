@@ -1,6 +1,7 @@
 // pages/mine/mine.js —— 我的：真实用户资料、角色、提交统计、退出登录
 var api = require('../../utils/api.js');
 var store = require('../../utils/store.js');
+var share = require('../../utils/share.js');
 
 Page({
   data: {
@@ -119,5 +120,9 @@ Page({
         wx.showToast({ title: '已退出', icon: 'none' });
       }
     });
-  }
+  },
+
+  // ---- 分享 ----
+  onShareAppMessage: share.app,
+  onShareTimeline: share.timeline()
 });

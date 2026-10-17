@@ -6,6 +6,7 @@
 var api = require('../../utils/api.js');
 var fmt = require('../../utils/format.js');
 var store = require('../../utils/store.js');
+var share = require('../../utils/share.js');
 
 var POLL_INTERVAL = 1200; // 判题轮询间隔（实测后端约 1s 出结果）
 var MAX_POLL = 15;
@@ -245,5 +246,21 @@ Page({
     var id = e.currentTarget.dataset.id;
     if (!id) return;
     wx.navigateTo({ url: '/pages/submission-detail/submission-detail?id=' + id });
+  },
+
+  // ---- 分享 ----
+  onShareAppMessage: share.build(function () {
+    var p = this.data.problem;
+    return {
+      title: p ? (p.title + ' · HOJ 题库') : 'HOJ 题库',
+      path: '/pages/detail/detail?pid=' + encodeURIComponent(this.data.key || '')
+    };
+  }),
+  onShareTimeline: function () {
+    var p = this.data.problem;
+    return {
+      title: p ? (p.title + ' · HOJ 题库') : 'HOJ 题库',
+      query: 'pid=' + encodeURIComponent(this.data.key || '')
+    };
   }
 });
